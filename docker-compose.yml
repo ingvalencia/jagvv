@@ -7,4 +7,13 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    command: bash -c "if [ ! -f ./package.json ]; then npm install -g @angular/cli && ng new my-app --skip-git --skip-install --directory ./; fi && npm install && ng serve --host 0.0.0.0"
+    command: >
+      bash -c "if [ ! -d ./node_modules ]; then
+        if [ ! -f ./package.json ]; then
+          npm install -g @angular/cli &&
+          ng new my-app --skip-git --directory ./ --force;
+        else
+          npm install;
+        fi
+      fi &&
+      npx ng serve --host 0.0.0.0"
