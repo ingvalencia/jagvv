@@ -1,8 +1,0 @@
-version: '3.8'
-services:
-  angular-cli:
-    image: node:18
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: bash -c "npm install -g @angular/cli && ng new my-angular-app --skip-git --directory ./ --skip-install"
