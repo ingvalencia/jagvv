@@ -8,12 +8,12 @@ services:
       - .:/app
     working_dir: /app
     command: >
-      bash -c "if [ ! -d ./node_modules ]; then
-        if [ ! -f ./package.json ]; then
-          npm install -g @angular/cli &&
-          npx ng new my-app --skip-git --directory ./ --force;
-        else
-          npm install;
-        fi
-      fi &&
-      npx ng serve --host 0.0.0.0"
+      bash -c "npm install -g @angular/cli &&
+                if [ ! -d ./node_modules ]; then
+                  if [ ! -f ./package.json ]; then
+                    npx ng new my-app --skip-git --directory ./ --force;
+                  else
+                    npm install;
+                  fi
+                fi &&
+                npx ng serve --host 0.0.0.0"
