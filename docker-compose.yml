@@ -11,7 +11,7 @@ services:
       bash -c "if [ ! -d ./node_modules ]; then
         if [ ! -f ./package.json ]; then
           npm install -g @angular/cli &&
-          ng new my-app --skip-git --directory ./ --force;
+          npx ng new my-app --skip-git --directory ./ --force;
         else
           npm install;
         fi
