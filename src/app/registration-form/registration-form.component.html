@@ -1,0 +1,23 @@
+<form class="example-form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput placeholder="Nombre" [(ngModel)]="formData.nombre" name="nombre" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Apellido Paterno</mat-label>
+    <input matInput placeholder="Apellido Paterno" [(ngModel)]="formData.apaterno" name="apaterno" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" [(ngModel)]="formData.email" name="email" type="email" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Celular</mat-label>
+    <input matInput placeholder="Celular" [(ngModel)]="formData.celular" name="celular" type="tel" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Enviar</button>
+</form>
