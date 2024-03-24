@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  angular-dev:
+    image: node:18
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: bash -c "if [ ! -f ./package.json ]; then npm install -g @angular/cli && ng new my-app --skip-git --skip-install --directory ./; fi && npm install && ng serve --host 0.0.0.0"
