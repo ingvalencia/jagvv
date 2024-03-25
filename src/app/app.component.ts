@@ -5,7 +5,10 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RegistrationFormComponent],
+  imports: [
+    RouterOutlet, 
+    RegistrationFormComponent, 
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
