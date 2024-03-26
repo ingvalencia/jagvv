@@ -15,7 +15,7 @@ Se debe instalar Docker y también Docker Compose, esto depende del sistema oper
 `cd jagvv`
 
 ### 2.3 Iniciar el contenedor
-Desde la misma terminal, ejecutar el comando que se encargará de ejecutar todo el pipeline descrito en el archivo `docker-compose.yml`:
+Desde la misma terminal, ejecutar el comando que se encargará de ejecutar todo el pipeline descrito en el archivo docker-compose.yml:
 
 `docker-compose up --build`
 
