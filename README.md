@@ -1,27 +1,49 @@
 # MyApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+## 0. Descripción
+La aplicación desarrollada que da solución al ejercicio propuesto se basa en un frontend (un formulario) hecho con Angular y Material 17. Para lograr lo anterior se utilizó Docker, quien conteneriza todo este ecosistema basado en Angular. La comunicación con el backend se hace por medio de un service y la creación de un proxy que permite solventar el problema de restricción por CORS que se tiene al llamar a un servicio expuesto en un servidor (en este caso el API de proc-leads) desde un desarrollo o servidor local.
 
-## Development server
+## 1. Software previo requerido
+Se debe instalar Docker y también Docker Compose, esto depende del sistema operativo que se use. La forma más sencilla de contar con lo anterior es, en Windows y/o Mac, instalando Docker Desktop.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 2. Uso
 
-## Code scaffolding
+### 2.1 Clonar el repositorio
+`https://github.com/ingvalencia/jagvv`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 2.2 Acceder a la carpeta raíz usando la terminal del S. Op.
+`cd jagvv`
 
-## Build
+### 2.3 Iniciar el contenedor
+Desde la misma terminal, ejecutar el comando que se encargará de ejecutar todo el pipeline descrito en el archivo `docker-compose.yml`:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+`docker-compose up --build`
 
-## Running unit tests
+### 2.4 Desde un navegador web, ingresar a
+`http://localhost:4200/`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2.5 Capturar los datos para el registro del lead
 
-## Running end-to-end tests
+## 3. Otros comandos Docker
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Listar los contenedores:
+`docker ps`
 
-## Further help
+- Acceder al contenedor de la aplicación:
+`docker exec -it jagvv-angular-dev-1 /bin/bash`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Detener el contenedor:
+`docker stop jagvv-angular-dev-1`
+
+- Iniciar el contenedor:
+`docker-compose up --build`
+
+- Reiniciar el contenedor:
+`docker-compose restart`
+
+- Recrear desde cero el contenedor:
+`docker-compose down && docker-compose up --build`
+
+## Desarrollo con Angular
+
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 17.3.1. Para obtener más ayuda sobre Angular CLI use `ng help` o vaya a la [página de Angular CLI Overview and Command Reference](https://angular.io/cli).
