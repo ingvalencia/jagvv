@@ -1,0 +1,8 @@
+{
+  "/proc-leads": {
+    "target": "https://webhooksqa.uvm.mx",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

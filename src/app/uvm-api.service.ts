@@ -19,9 +19,12 @@ export class UvmApiService {
 
   sendFormData(formData: any): Observable<any> {
     const formDataToSend = new FormData();
+
     Object.keys(formData).forEach(key => {
       formDataToSend.append(key, formData[key]);
     });
+
+    console.log('Enviando form data:', formData);
 
     return this.http.post(this.leadsUrl, formDataToSend);
   }

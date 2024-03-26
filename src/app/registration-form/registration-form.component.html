@@ -33,7 +33,6 @@
     </mat-form-field>
   
     <!-- Datos de la oferta académica -->
-    <!-- El campo campusLargo se actualiza a través de la selección del usuario y por eso se usa (ngModel) -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Campus</mat-label>
       <mat-select [(ngModel)]="formData.campusLargo" name="campusLargo" (selectionChange)="onCampusSelected($event.value)" required>
@@ -41,15 +40,13 @@
       </mat-select>
     </mat-form-field>
   
-    <!-- El campo carrera se actualiza a través de la selección del usuario y por eso se usa (ngModel) -->
-    <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCampus">
+    <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.campusLargo">
       <mat-label>Carrera</mat-label>
       <mat-select [(ngModel)]="formData.carrera" name="carrera" (selectionChange)="onCarreraSelected($event.value)" required>
         <mat-option *ngFor="let carrera of carrerasOptions" [value]="carrera.clave">{{ carrera.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>
   
-    <!-- Los siguientes campos están deshabilitados porque sus valores son fijados por la lógica de la aplicación y no por entrada del usuario -->
     <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.carreraInteres">
       <mat-label>Carrera de Interés</mat-label>
       <input matInput [value]="formData.carreraInteres" disabled>
