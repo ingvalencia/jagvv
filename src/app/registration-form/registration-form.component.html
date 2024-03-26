@@ -1,42 +1,55 @@
 <div class="form-container">
   <h1 class="form-title">Formulario de Registro</h1>
-  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="registration-form">
-    <!-- Datos personales -->
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="registration-form" novalidate>
+    <!-- Nombre -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Nombre" ngModel name="nombre" required>
+      <input matInput placeholder="Nombre" [(ngModel)]="formData.nombre" name="nombre" #nombre="ngModel" required>
+      <mat-error *ngIf="nombre.invalid && nombre.touched">Este campo es obligatorio.</mat-error>
     </mat-form-field>
-  
+
+    <!-- Apellido Paterno -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Apellido Paterno</mat-label>
-      <input matInput placeholder="Apellido Paterno" ngModel name="apaterno" required>
+      <input matInput placeholder="Apellido Paterno" [(ngModel)]="formData.apaterno" name="apaterno" #apaterno="ngModel" required>
+      <mat-error *ngIf="apaterno.invalid && apaterno.touched">Este campo es obligatorio.</mat-error>
     </mat-form-field>
-  
+
+    <!-- Email -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" ngModel name="email" required email>
+      <input matInput placeholder="Email" [(ngModel)]="formData.email" name="email" #email="ngModel" required email>
+      <mat-error *ngIf="email.invalid && email.touched">
+        <span *ngIf="email.errors?.['required']">Este campo es obligatorio.</span>
+        <span *ngIf="email.errors?.['email']">Por favor ingrese un email válido.</span>
+      </mat-error>
     </mat-form-field>
-  
+
+    <!-- Celular -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Celular</mat-label>
-      <input matInput placeholder="Celular" ngModel name="celular" required type="tel">
+      <input matInput placeholder="Celular" [(ngModel)]="formData.celular" name="celular" #celular="ngModel" required type="tel">
+      <mat-error *ngIf="celular.invalid && celular.touched">Este campo es obligatorio.</mat-error>
     </mat-form-field>
   
     <!-- Datos de la oferta académica -->
+    <!-- El campo campusLargo se actualiza a través de la selección del usuario y por eso se usa (ngModel) -->
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Campus</mat-label>
-      <mat-select ngModel name="campusLargo" (selectionChange)="onCampusSelected($event.value)" required>
+      <mat-select [(ngModel)]="formData.campusLargo" name="campusLargo" (selectionChange)="onCampusSelected($event.value)" required>
         <mat-option *ngFor="let campus of campusOptions" [value]="campus">{{ campus }}</mat-option>
       </mat-select>
     </mat-form-field>
   
+    <!-- El campo carrera se actualiza a través de la selección del usuario y por eso se usa (ngModel) -->
     <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCampus">
       <mat-label>Carrera</mat-label>
-      <mat-select ngModel name="carrera" (selectionChange)="onCarreraSelected($event.value)" required>
+      <mat-select [(ngModel)]="formData.carrera" name="carrera" (selectionChange)="onCarreraSelected($event.value)" required>
         <mat-option *ngFor="let carrera of carrerasOptions" [value]="carrera.clave">{{ carrera.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>
   
+    <!-- Los siguientes campos están deshabilitados porque sus valores son fijados por la lógica de la aplicación y no por entrada del usuario -->
     <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.carreraInteres">
       <mat-label>Carrera de Interés</mat-label>
       <input matInput [value]="formData.carreraInteres" disabled>
@@ -52,6 +65,6 @@
       <input matInput [value]="formData.ciclo" disabled>
     </mat-form-field>
   
-    <button mat-raised-button color="primary" type="submit">Enviar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.valid">Enviar</button>
   </form>
 </div>

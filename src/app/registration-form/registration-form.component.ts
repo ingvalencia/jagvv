@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +43,7 @@ export class RegistrationFormComponent implements OnInit {
     campusLargo: '',
     carrera: '',
     carreraInteres: '',
-    subNivelInteres: '',
+    subNivelInteres: '12',
     nivelInteres: '',
     ciclo: '',
     // Campos que no se muestran en el formulario pero se envían
@@ -94,16 +94,23 @@ export class RegistrationFormComponent implements OnInit {
 
   onSubmit() {
     const dataToSend = {
-      gclid: '',
-      utm_campaign: '',
-      banner: 'GiovannyValencia',
-      CID: '2016705784.1697574806',
-      verify_token: 'UVM.G0-24',
-      marcable: '2',
-      urlreferrer: document.referrer || 'direct',
-      dispositivo: `${navigator.platform}; ${navigator.userAgent}`
+      ...this.formData,
+      nombre: this.formData.nombre,
+      apaterno: this.formData.apaterno,
+      email: this.formData.email,
+      celular: this.formData.celular,
+      campusLargo: this.selectedCampus,
+      carrera: this.selectedCarrera
     };
 
     console.log(dataToSend);
+    this.uvmApiService.sendFormData(dataToSend).subscribe(
+      response => {
+        console.log('Formulario enviado con éxito', response);
+      },
+      error => {
+        console.error('Hubo un error al enviar el formulario', error);
+      }
+    );
   }
 }
