@@ -32,6 +32,7 @@ export class RegistrationFormComponent implements OnInit {
   cicloOptions: any[] = [];
   selectedCampus: string | null = null;
   selectedCarrera: string | null = null;
+  carreraInteresUnico: string | null = null;
 
   // Inicializa el modelo para los datos del formulario
   formData = {
@@ -65,29 +66,37 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onCampusSelected(value: string): void {
-    console.log("algo");
-
     this.selectedCampus = value;
+  
     this.uvmApiService.getAcademicOfferings().subscribe(data => {
-      this.carrerasOptions = data.filter((item: { nombrelargo_campus: string; }) => item.nombrelargo_campus === value)
-                                 .map((item: { crmit_claveprogramabanner: any; ofertando_crmit_name: any; }) => { 
-                                   return { 
-                                     clave: item.crmit_claveprogramabanner, 
-                                     nombre: item.ofertando_crmit_name 
-                                   }; 
-                                 });
+      this.carrerasOptions = data
+        .filter((item: any) => item.nombrelargo_campus === value)
+        .map((item: any) => ({
+          clave: item.crmit_claveprogramabanner,
+          nombre: item.ofertando_crmit_name
+        }));
     });
   }
 
-  onCarreraSelected(value: string): void {
+  onCarreraSelected(value: any): void {
     this.selectedCarrera = value;
+    this.uvmApiService.getAcademicOfferings().subscribe(data => {
+      const ofertaSeleccionada = data.find((item: any) => item.crmit_claveprogramabanner === value);
+
+      if (ofertaSeleccionada) {
+        this.formData.carrera = ofertaSeleccionada.ofertando_crmit_name;
+        this.formData.carreraInteres = ofertaSeleccionada.carrerainteres;
+        this.formData.nivelInteres = ofertaSeleccionada.crmit_nivelcrm;
+        this.formData.ciclo = ofertaSeleccionada.crmit_cicloreinscripciones;
+      }
+    });
   }
 
   onSubmit() {
     const dataToSend = {
       gclid: '',
       utm_campaign: '',
-      banner: 'tunombre',
+      banner: 'GiovannyValencia',
       CID: '2016705784.1697574806',
       verify_token: 'UVM.G0-24',
       marcable: '2',
@@ -96,6 +105,5 @@ export class RegistrationFormComponent implements OnInit {
     };
 
     console.log(dataToSend);
-    // Aquí incluirías la lógica para enviar los datos a donde necesites
   }
 }

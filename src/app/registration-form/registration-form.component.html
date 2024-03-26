@@ -1,70 +1,57 @@
-<form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="example-form">
-
-  <!-- Datos personales -->
-  <mat-form-field appearance="fill" class="example-full-width">
-    <mat-label>Nombre</mat-label>
-    <input matInput placeholder="Nombre" ngModel name="nombre" required>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width">
-    <mat-label>Apellido Paterno</mat-label>
-    <input matInput placeholder="Apellido Paterno" ngModel name="apaterno" required>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Email" ngModel name="email" required email>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width">
-    <mat-label>Celular</mat-label>
-    <input matInput placeholder="Celular" ngModel name="celular" required type="tel">
-  </mat-form-field>
-
-  <!-- Datos de la oferta académica -->
-  <mat-form-field appearance="fill" class="example-full-width">
-    <mat-label>Campus</mat-label>
-    <mat-select ngModel name="campusLargo" (selectionChange)="onCampusSelected($event.value)" required>
-      <mat-option *ngFor="let campus of campusOptions" [value]="campus">{{ campus }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-<!--
-  <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCampus">
-    <mat-label>Carrera</mat-label>
-    <mat-select ngModel name="carrera" (selectionChange)="onCarreraSelected($event.value)" required>
-      <mat-option *ngFor="let carrera of carrerasOptions" [value]="carrera">{{ carrera }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCarrera">
-    <mat-label>Interés de Carrera</mat-label>
-    <mat-select ngModel name="carreraInteres" required>
-      <mat-option *ngFor="let interes of carreraInteresOptions" [value]="interes">{{ interes }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCarreraInteres">
-    <mat-label>Sub Nivel de Interés</mat-label>
-    <mat-select ngModel name="subNivelInteres" required>
-      <mat-option *ngFor="let subnivel of subNivelInteresOptions" [value]="subnivel">{{ subnivel }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedSubNivelInteres">
-    <mat-label>Nivel de Interés</mat-label>
-    <mat-select ngModel name="nivelInteres" required>
-      <mat-option *ngFor="let nivel of nivelInteresOptions" [value]="nivel">{{ nivel }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedNivelInteres">
-    <mat-label>Ciclo</mat-label>
-    <mat-select ngModel name="ciclo" required>
-      <mat-option *ngFor="let ciclo of cicloOptions" [value]="ciclo">{{ ciclo }}</mat-option>
-    </mat-select>
-  </mat-form-field>
--->
-
-  <button mat-raised-button color="primary" type="submit">Enviar</button>
-</form>
+<div class="form-container">
+  <h1 class="form-title">Formulario de Registro</h1>
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="registration-form">
+    <!-- Datos personales -->
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" ngModel name="nombre" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput placeholder="Apellido Paterno" ngModel name="apaterno" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" ngModel name="email" required email>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Celular</mat-label>
+      <input matInput placeholder="Celular" ngModel name="celular" required type="tel">
+    </mat-form-field>
+  
+    <!-- Datos de la oferta académica -->
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Campus</mat-label>
+      <mat-select ngModel name="campusLargo" (selectionChange)="onCampusSelected($event.value)" required>
+        <mat-option *ngFor="let campus of campusOptions" [value]="campus">{{ campus }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width" *ngIf="selectedCampus">
+      <mat-label>Carrera</mat-label>
+      <mat-select ngModel name="carrera" (selectionChange)="onCarreraSelected($event.value)" required>
+        <mat-option *ngFor="let carrera of carrerasOptions" [value]="carrera.clave">{{ carrera.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.carreraInteres">
+      <mat-label>Carrera de Interés</mat-label>
+      <input matInput [value]="formData.carreraInteres" disabled>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.nivelInteres">
+      <mat-label>Nivel de Interés</mat-label>
+      <input matInput [value]="formData.nivelInteres" disabled>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="example-full-width" *ngIf="formData.ciclo">
+      <mat-label>Ciclo</mat-label>
+      <input matInput [value]="formData.ciclo" disabled>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </form>
+</div>

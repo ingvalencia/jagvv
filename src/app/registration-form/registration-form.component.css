@@ -1,11 +1,22 @@
-/* src/app/registration-form/registration-form.component.css */
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.registration-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin-top: 20px;
+}
